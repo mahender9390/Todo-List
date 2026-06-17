@@ -77,6 +77,7 @@ addbtn.addEventListener("click", (e) => {
     obj.add(inputtask.value);
     obj.delete();
     obj.finishedtask();
+    obj.edittask();
     if (inputtask.value.trim() !== "" && !tasks.includes(inputtask.value)) {
         tasks = [...tasks, inputtask.value];
         localStorage.setItem("tasks", JSON.stringify(tasks));
