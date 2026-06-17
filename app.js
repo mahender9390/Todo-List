@@ -1,9 +1,8 @@
 const addbtn = document.querySelector("form button");
-const intask = document.querySelector("form input");
+const inputtask = document.querySelector("form input");
 const task = document.querySelector(".task");
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 class addTask {
-
     add(newtask) {
         if (newtask.trim() === "") {
             alert("plz enter you task");
@@ -29,25 +28,42 @@ class addTask {
             })
         });
     }
+    finishedtask()
+    {
+        const addedtasks=document.querySelectorAll(".list p");
+        addedtasks.forEach((p)=>{
+            p.addEventListener("click",()=>{
+                if(p.style.textDecoration =="line-through")
+                {
+                    p.style.textDecoration="none";
+                }
+                else{
+                    p.style.textDecoration="line-through";
+                }
+            })
+        })
+    }
 }
 let obj = new addTask();
 addbtn.addEventListener("click", (e) => {
     e.preventDefault();
-    if (tasks.includes(intask.value)) {
+    if (tasks.includes(inputtask.value)) {
         alert("YOU HAVE ALREADY A TASK WITH THE NAME");
         return;
     }
-    obj.add(intask.value);
+    obj.add(inputtask.value);
     obj.delete();
-    if (intask.value.trim() !== "" && !tasks.includes(intask.value)) {
-        tasks = [...tasks, intask.value];
+    obj.finishedtask();
+    if (inputtask.value.trim() !== "" && !tasks.includes(inputtask.value)) {
+        tasks = [...tasks, inputtask.value];
         localStorage.setItem("tasks", JSON.stringify(tasks));
     }
-    intask.value = "";
+    inputtask.value = "";
 });
 (() => {
     for (t of tasks) {
         obj.add(t);
     }
     obj.delete();
+    obj.finishedtask();
 })();
