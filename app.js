@@ -11,6 +11,7 @@ class addTask {
             task.innerHTML += `
             <div class="list">
                 <p>${newtask}</p>
+                <span><i class="fa-regular fa-pen-to-square"></i></span>
                 <button><i class="fa-solid fa-trash"></i></button>
             </div>
         `;
@@ -43,6 +44,28 @@ class addTask {
             })
         })
     }
+    edittask(){
+        const edit=document.querySelectorAll(".list span");
+        edit.forEach((e)=>{
+            e.addEventListener("click",()=>{
+                let para= e.parentNode.children[0];
+                let oldtask=e.parentNode.children[0].innerText;
+                para.contentEditable ="true";
+                para.focus();
+                para.addEventListener("blur",()=>
+                {
+                    para.contentEditable ="false";
+                    for(let i=0;i<tasks.length;i++){
+                        if(tasks[i]===oldtask)
+                        {
+                            tasks[i]=para.innerText;
+                        }
+                    }
+                    localStorage.setItem("tasks",JSON.stringify(tasks));
+                });
+            })
+        })
+    }
 }
 let obj = new addTask();
 addbtn.addEventListener("click", (e) => {
@@ -66,4 +89,5 @@ addbtn.addEventListener("click", (e) => {
     }
     obj.delete();
     obj.finishedtask();
+    obj.edittask();
 })();

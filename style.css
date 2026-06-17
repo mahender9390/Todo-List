@@ -72,17 +72,20 @@ form button {
     margin-top: 10px;
 }
 
-.list p {
+.list p{
     flex: 1;
     min-width: 0;
     overflow-wrap: break-word;
     padding: 0.5rem;
+    cursor: pointer;
 }
-
+.list span{
+    margin: 1.25rem;
+    cursor: pointer;
+}
 .list button {
-    width: 80px;
-    height: 53px;
     border: none;
     outline: none;
-    border-radius: 0.5rem;
+    margin-right: 1.25rem;
+    cursor: pointer;
 }
